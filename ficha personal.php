@@ -1,8 +1,8 @@
 <?php
     $nombre = "Fabian Bogado";
     $edad ="18";
-    $fecha = date("d/m/Y")
-
+    $fecha = date("d/m/Y");
+    $aPeliculas = array("Batman", "Titanic", "Spider-man");
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -35,7 +35,10 @@
                         </tr>
                         <tr>
                             <th>Pelicula favorita:</th>
-                            <td>batman</td>
+                            <td><?php echo $aPeliculas[2];?><br>
+                                <?php echo $aPeliculas[0];?><br>
+                                <?php echo $aPeliculas[1];?>
+                        </td>
                         </tr>
                 </tbody>
 
