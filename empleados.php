@@ -44,3 +44,15 @@ function calcularNeto($bruto){
                     <td><?php echo number_format(calcularNeto($aEmpleados[$i]["bruto"]), 2, ",", ".");  ?></td>
                 </tr>
             <?php } ?>
+            </table>
+            </div>
+        </div>
+            <div>
+                <div class="col-12">
+                    <p>Cantidad de empleados activos: <?php echo count($aEmpleados); ?></p>
+            </div>
+        </div>
+    
+    </div>
+</body>
+</html>
