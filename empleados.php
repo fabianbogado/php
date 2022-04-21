@@ -48,7 +48,7 @@ function calcularNeto($bruto){
             </div>
         </div>
             <div>
-                <div class="col-12">
+                <div>
                     <p>Cantidad de empleados activos: <?php echo count($aEmpleados); ?></p>
             </div>
         </div>
