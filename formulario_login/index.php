@@ -46,11 +46,11 @@ if($_POST){
 
                 </div>
                 <form method="POST" action="">
-                    <div>
+                    <div class="col-12">
                         <label for="txtNombre">Nombre</label>
                         <input type="text" name="txtNombre" id="txtNombre" class="form-control">
                     </div>
-                    <div>
+                    <div class="col-12">
                         <label for="txtClave">Clave</label>
                         <input type="password" name="txtClave" id="txtClave" class="form-control">
                     </div>
