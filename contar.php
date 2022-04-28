@@ -28,7 +28,7 @@ $aProductos[] = array("nombre" => "Aire Acondicionado Split Inverter Frío/Calor
 function contar($aArray){
     $cont = 0;
     foreach( $aArray as $item){
-        $cont++;
+        $cont++; // $cont = $cont + 1 ;
     }
     return $cont; 
 }

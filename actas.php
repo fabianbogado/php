@@ -17,7 +17,7 @@
             </div>
             <div class="col-12">
             <table class="table table-hover broder">
-                <tbody>
+                <thead>
                    <tr>
                        <th>ID</th>
                        <th>Alumnos</th>
@@ -25,16 +25,27 @@
                        <th>Nota 2</th>
                        <th>Promedio</th>
                    </tr>
-                   <tr>
-                       <td>1</td>
-                       <td>juan perez</td>
-                       <td>9</td>
-                       <td>8</td>
-                   </tr>
-                   <tr>
-
-                   </tr>
-                </tbody>
+                </thead>
+                   <tbody>
+                        <tr>
+                           <td>1</td>
+                           <td>juan perez</td>
+                           <td>9</td>
+                           <td>8</td>
+                        </tr>
+                            <tr>
+                            <td>2</td>
+                            <td>Ana valle</td>
+                            <td>4</td>
+                            <td>9</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>Gonzalo Roldan</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+                   </tbody>
             </table>
             </div>
         </div>
