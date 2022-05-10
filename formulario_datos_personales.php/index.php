@@ -16,7 +16,7 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <form method="POST" action="resultado.php">
+                <form method="POST" action="acceso_confirmado.php">
                     <div class="pb-3">
                         <label for="">Nombre:*</label>
                         <input type="text" name="txtNombre" id="txtNombre" class="form-control">
