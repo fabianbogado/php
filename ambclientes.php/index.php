@@ -1,3 +1,39 @@
+<?php
+
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+if(file_exists("archivo.txt")){
+//si el archivo existe, cargo en los clientes en la variable aClientes
+    $strJson = file_get_contents("archivo.txt");
+
+    $aClientes = json_decode($strJson, true);
+
+} else {
+    // si el archivo no existe es por que no hay clientes 
+    $aClientes = array();
+
+}
+if($_POST){
+    $dni = $_POST["txtDni"];
+    $nombre = $_POST["txtNombre"];
+    $telefono = $_POST["txtTelefono"];
+    $correo = $_POST["txtCorreo"];
+
+    $aClientes = array();
+    $aClientes = array("dni" => $dni, 
+                        "nombre" => $nombre,
+                        "telefono" => $telefono,
+                        "correo" => $correo
+                    );
+                    //Convertir el array de clientes en json
+                    $strJson = json_encode($aClientes);
+                        //Almacenar en un archivo.txt el json con file_put_contents
+                    file_put_contents("archivo.txt", $strJson);
+}
+
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -54,11 +90,7 @@
                         <th>Nombre</th>
                         <th>Correo</th>
                         <th>Acciones</th>
-
-
                     </table>
-
-
                 </div>
             </div>
         </div>
