@@ -18,7 +18,7 @@
         </div>
         <div class="row">
             <div class="col-6">
-                <form method="POST" action="">
+                <form method="POST" action="" enctype="multipart/form-data">
                     <div class="pb-3">
                         <label for="txtDni">Dni*</label>
                         <input type="text" name="txtDni" id="txtDni" class="form-control">
@@ -35,27 +35,34 @@
                         <label for="txtCorreo">Correo*</label>
                         <input type="email" name="txtCorreo" id="txtCorreo" class="form-control">
                     </div>
-                    <div>
-
-                    </div>
                     <div class="pb-3">
+                        <p>Adjuntar archivo<input type="file" name="archivo1" id="archivo1"></p>
+                    </div>
+                    <div class="pb-2">
                         <p>Archivos admitidos: .jpg, pneg ,.png</p>
                     </div>
-                    <div class="pb-3">
+                    <div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                         <button type="submit" class="btn btn-danger">Nuevo</button>
                     </div>
                 </form>
-                <div class="col-12">
+            </div>
+                <div class="col-6">
                     <table class="table table-border">
-                        
+                        <th>Imagen</th>
+                        <th>Dni</th>
+                        <th>Nombre</th>
+                        <th>Correo</th>
+                        <th>Acciones</th>
+
 
                     </table>
 
 
                 </div>
-             </div>
+            </div>
         </div>
+
     </main>
 
 </body>
