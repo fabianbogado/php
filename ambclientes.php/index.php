@@ -50,18 +50,32 @@ if($_POST){
             $nombreImagen = "$nombreAleatorio.$extension";
             move_uploaded_file($archivo_tmp, "imagenes/$nombreImagen");
         }
-    }else{
-        
     }
-
-
-    $aClientes[] = array("dni" => $dni, 
+    if($id>= 0){
+    // si no se subio una imagen y estoy editanto  conservar en $nombreImagen el nombre 
+    // de la imagen anterior que esta asociada al cliente 
+            if ($_FILES["archivo"]["error"] == UPLOAD_ERR_OK){
+                $nombreImagen =  $aClientes[$id]["imagen"];
+            
+            }
+            // SI VIENE UNA IMAGEN Y HAY UNA ANTERIOR, ELIMINAR LA ANTERIOR 
+                    unlink("imagenes/imagen.jpg");
+                    // estoy editando 
+                     $aClientes[$id] = array("dni" => $dni, 
                         "nombre" => $nombre,
                         "telefono" => $telefono,
                         "correo" => $correo,
                         "imagen" => $nombreImagen
                         );
-
+                    }else {
+                        // estoy incertando un nuevo cliente
+                        $aClientes[] = array("dni" =>$dni,
+                        "nombre" => $nombre,
+                        "telefono" => $telefono,
+                        "correo" => $correo,
+                        "imagen" => $nombreImagen
+                    );
+                    }
                         //Convertir el array de clientes en json
                     $strJson = json_encode($aClientes);
 
@@ -116,7 +130,8 @@ if($_POST){
                     </div>
                     <div>
                         <button type="submit" class="btn btn-primary">Guardar</button>
-                        <button type="submit" class="btn btn-danger">Nuevo</button>
+                        <a href="index.php" class="btn btn-danger my-2">Nuevo</a>  
+
                     </div>
                 </form>
             </div>
@@ -132,7 +147,7 @@ if($_POST){
                    
                     <?php foreach($aClientes as $pos => $cliente): ?> 
                     <tr>          <!-- hacer que se vea la imagen cargada "TAREA" -->
-                        <td><img src="imagenes/<?php echo $cliente["imagen"]; ?>" class="img-fluid"></td> 
+                        <td><img src="imagenes/<?php echo $cliente["imagen"]; ?>" class="img-thumbnail"></td> 
                         <td><?php echo $cliente["dni"]; ?></td>
                         <td><?php echo $cliente["nombre"]; ?></td>
                         <td><?php echo $cliente["correo"]; ?></td>
