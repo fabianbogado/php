@@ -34,33 +34,6 @@ if(isset($_GET["do"]) && $_GET["do"] == "eliminar"){
 
 
 
-if($_FILES["archivo"]["error"] === UPLOAD_ERR_OK){
-    if(isset($aClientes[$id]["imagen"]) && $aClientes[$id]["imagen"] != ""){
-        if(file_exists("imagenes/" . $aClientes[$id]["imagen"])){
-            unlink("imagenes/" . $aClientes[$id]["imagen"]);
-        }
-    }
-    $nombreAleatorio = date("Ymdhmsi"); 
-    $archivo_tmp = $_FILES["archivo"]["tmp_name"];
-    $nombreArchivo = $_FILES["archivo"]["name"];
-    $extension = pathinfo($nombreArchivo, PATHINFO_EXTENSION);
-    $imagen = "$nombreAleatorio.$extension";
-
-    if($extension == "png" || $extension == "jpg" || $extension == "jpeg"){
-        move_uploaded_file($archivo_tmp, "imagenes/$imagenes");
-    }
-
-} else {
-   
-    if($id >= 0){
-        $imagen = $aClientes[$id]["imagen"];
-    } else {
-        $imagen = "";
-    }
-}
-
-
-
 
 if($_POST){
     $dni = $_POST["txtDni"];
@@ -69,6 +42,19 @@ if($_POST){
     $correo = $_POST["txtCorreo"];
     $nombreImagen = "";
 
+    if ($_FILES["archivo"]["error"] === UPLOAD_ERR_OK) {
+        $nombreAleatorio = date("Ymdhmsi") . rand(1000, 2000); //202205171842371010
+        $archivo_tmp = $_FILES["archivo"]["tmp_name"]; //C:\tmp\ghjuy6788765
+        $extension = pathinfo($_FILES["archivo"]["name"], PATHINFO_EXTENSION);
+        if($extension == "jpg" || $extension == "png" || $extension == "jpeg"){
+            $nombreImagen = "$nombreAleatorio.$extension";
+            move_uploaded_file($archivo_tmp, "imagenes/$nombreImagen");
+        }
+    }else{
+        
+    }
+
+
     $aClientes[] = array("dni" => $dni, 
                         "nombre" => $nombre,
                         "telefono" => $telefono,
@@ -76,7 +62,7 @@ if($_POST){
                         "imagen" => $nombreImagen
                         );
 
-                    //Convertir el array de clientes en json
+                        //Convertir el array de clientes en json
                     $strJson = json_encode($aClientes);
 
                         //Almacenar en un archivo.txt el json con file_put_contents
@@ -125,7 +111,7 @@ if($_POST){
                     </div>
                     <div class="pb-3">
                         <label for="txtArchivo1">Adjuntar archivo</label>
-                        <input type="file" name="archivo1" id="archivo1" accept=".png, .jpg, .pneg">
+                        <input type="file" name="archivo" id="archivo" accept=".png, .jpg, .pneg">
                         <small class="d-block">Archivos admitidos: .jpg, .jpeg, .png</small>
                     </div>
                     <div>
@@ -146,7 +132,7 @@ if($_POST){
                    
                     <?php foreach($aClientes as $pos => $cliente): ?> 
                     <tr>          <!-- hacer que se vea la imagen cargada "TAREA" -->
-                        <td><img src="imagenes/<?php echo $cliente["imagen"]; ?>" class="img-thumnail"></td> 
+                        <td><img src="imagenes/<?php echo $cliente["imagen"]; ?>" class="img-fluid"></td> 
                         <td><?php echo $cliente["dni"]; ?></td>
                         <td><?php echo $cliente["nombre"]; ?></td>
                         <td><?php echo $cliente["correo"]; ?></td>
