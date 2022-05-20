@@ -1,5 +1,4 @@
 <?php
-
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
@@ -54,12 +53,17 @@ if($_POST){
     if($id>= 0){
     // si no se subio una imagen y estoy editanto  conservar en $nombreImagen el nombre 
     // de la imagen anterior que esta asociada al cliente 
-            if ($_FILES["archivo"]["error"] == UPLOAD_ERR_OK){
+            if ($_FILES["archivo"]["error"] !== UPLOAD_ERR_OK){
                 $nombreImagen =  $aClientes[$id]["imagen"];
             
-            }
+            } else{
+
+            
             // SI VIENE UNA IMAGEN Y HAY UNA ANTERIOR, ELIMINAR LA ANTERIOR 
-                    unlink("imagenes/imagen.jpg");
+                if(file_exists("imagenes/". $aClientes[$id]["imagen"])) {
+                    unlink("imagenes/". $aClientes[$id]["imagen"]);
+                }
+            }
                     // estoy editando 
                      $aClientes[$id] = array("dni" => $dni, 
                         "nombre" => $nombre,
@@ -100,7 +104,7 @@ if($_POST){
 <body>
     <main class="container">
         <div class="row">
-            <div class="col-12 text-center">
+            <div class="col-12 py-5 text-center">
                 <h1>Registro de clientes</h1>
             </div>
         </div>
