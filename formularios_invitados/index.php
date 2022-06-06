@@ -5,25 +5,43 @@ ini_set('display_startup_errors', '1');
 ini_set('error_reporting', E_ALL);
 
 
-//Si existe el archivo invitados lo abrimos y cargamos en una variable del tipo array
-//los DNIs permitidos
-
-//Sino el array queda como un array vacio
-
-
 if($_POST){
 
-    if(isset($_POST["btnProcesar"])){
-        //Si el DNI ingresado se encuentra en la lista se mostrará un mensaje de bienvenido
+    if(file_exists("invitados.txt")){
+        //Si existe el archivo invitados lo abrimos y cargamos en una variable del tipo array
+        //los DNIs permitidos
+            $aInvitados = explode(",", file_get_contents("invitados.txt"));
+        } else{
+        //Sino el array queda como un array vacio
+            $aInvitados = array();
+        }
 
+    if(isset($_POST["btnProcesar"])){
+        $txtDni = $_POST["txtDni"];
+        //Si el DNI ingresado se encuentra en la lista se mostrará un mensaje de bienvenido
+    if (in_array($txtDni, $invitados)){
+        $mensaje = "Bienvenid@ a la fiesta";
+        $alert = "success";
+    } else {
         //Sino un mensaje de No se encuentra en la lista de invitados.
+        $mensaje = "No se encuentra en la lista de invitados.";
+        $alert = "danger";    
+    }
+
     }
 
     if(isset($_POST["btnVip"])){
+        $txtVip = $_POST["txtVIP"];
         //Si el codigo es verde entonces mostrará Su código de acceso es ....
-
+        if ($txtVip == "verde"){
+            $mensaje = "su codigo de acceso es" . rand(1000, 9999);
+    }else{
         //Sino Ud. no tiene pase VIP
+        $mesaje = "Usted no tiene el pase vip";
+        $alert = "danger";
     }
+    }
+
 
 }
 ?>
@@ -43,6 +61,11 @@ if($_POST){
         <div class="row">
             <div class="col-12 text-center">
                 <h1>Lista de invitados</h1>
+                <?php if ($mensaje != ""): ?>
+                    <div class="alert alert-<?php echo $alert; ?>" role="alert">
+                    <?php echo $mensaje; ?>
+                </div>
+                 <?php endif; ?>
             </div>    
             <div class="py1">
                 <p>Complete el siguiente formulario:</p>
@@ -50,14 +73,14 @@ if($_POST){
             <div class="col-12">
                 <form action="" method="post">
                     <div class="py-1">
-                        <label for="">Ingrese el DNI:</label>
+                        <label for="txtDni">Ingrese el DNI:</label>
                         <input type="text" name="txtDni" id="txtDni" class="form-control" required value>
                         <div class="py-1">
                             <button type="submit" name="btnProcesar" class="btn btn-primary">Verificar invitado</button>
                         </div>
                     </div>
                     <div class="py-1">
-                        <label for="">Ingrese el codigo secreto para el pase VIP:</label>
+                        <label for="txtVip">Ingrese el codigo secreto para el pase VIP:</label>
                         <input type="text" name="txtCodigo" id="" class="form-control" required value>
                     </div>
                      <div class="py-1">
