@@ -1,5 +1,5 @@
 <?php
-
+$pg = "inicio";
 include_once("header.php"); 
 
 ?>
