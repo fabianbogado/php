@@ -32,7 +32,7 @@ class Persona{
 
 class Alumno extends Persona{
     private $legajo;
-    private $notaPorfolio;
+    private $notaPortfolio;
     private $notaPhp;
     private $notaProyecto;
 
@@ -41,13 +41,13 @@ class Alumno extends Persona{
     }
 
     public function __set($propiedad, $valor){
-        $this->$propiedad;
+        $this->$propiedad = $valor;
     }
 
     public function __construct($dni="", $nombre=""){
         $this->dni = $dni;
         $this->nombre = $nombre;
-        $this->notaPorfolio = 0.0;
+        $this->notaPortfolio = 0.0;
         $this->notaPhp = 0.0;
         $this->notaProyecto = 0.0;
     }
@@ -77,7 +77,7 @@ class Docente extends Persona{
     }
 
     public function __set($propiedad, $valor){
-        $this->$propiedad;
+        $this->$propiedad = $valor;
     }
 
     const ESPECIALIDAD_WP = "wordprees";
@@ -117,9 +117,9 @@ class Docente extends Persona{
     $alumno2->setDni("45026673");
     $alumno2->setEdad("18");
     $alumno2->setNacionalidad("Argentina");
-    $alumno2->notaPhp = 0;
+    $alumno2->notaPhp = 9;
     $alumno2->notaPortfolio = 7;
-    $alumno2->notaProyecto = 0.0;
+    $alumno2->notaProyecto = 9;
     $alumno2->imprimir();
             //3
     $docente = new Docente();
